@@ -17,6 +17,7 @@
 
     <nav class="topnav glass-effect">
         <div class="logo">
+            <img src="{{ url_for('static', filename='images/icons/logo.png') }}" alt="Finance Logo">
             <h2>Personal Finance</h2>
         </div>
         <ul>
@@ -46,7 +47,9 @@
                 <span class="notification-badge">3</span>
             </div>
             <div class="user-profile">
-                <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="User Avatar">
+                <img src="{{ url_for('static', filename='images/avatars/user-avatar.png') }}" 
+                     alt="User Avatar"
+                     class="avatar-img">
                 <div class="user-dropdown">
                     <span>John Doe</span>
                     <i class="fas fa-chevron-down"></i>
@@ -62,18 +65,10 @@
                     <h1 class="gradient-text">Welcome Back, <span class="user-name">John!</span></h1>
                     <p class="subtitle">Your financial summary for <span id="currentDate"></span></p>
                 </div>
-                <div class="quick-stats">
-                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
-                        <div class="stat-icon">
-                            <i class="fas fa-arrow-trend-up"></i>
-                        </div>
-                        <div class="stat-info">
-                            <h3>Portfolio Value</h3>
-                            <p class="stat-value">₹1,250,000</p>
-                            <span class="stat-change positive">+15.3%</span>
-                        </div>
-                    </div>
-                    <!-- Add more stat cards -->
+                <div class="hero-illustration">
+                    <img src="{{ url_for('static', filename='images/illustrations/finance-hero.svg') }}" 
+                         alt="Finance Illustration"
+                         class="hero-img">
                 </div>
             </div>
         </header>
@@ -138,7 +133,14 @@
                     </div>
                     <div class="card-body">
                         <div class="transaction-list">
-                            <!-- Transaction items will be dynamically added -->
+                            {% if not transactions %}
+                            <div class="empty-state">
+                                <img src="{{ url_for('static', filename='images/illustrations/empty-state.svg') }}" 
+                                     alt="No transactions"
+                                     class="empty-state-img">
+                                <p>No transactions yet</p>
+                            </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
