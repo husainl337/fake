@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Finance Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="topnav">
+        <div class="logo">
+            <h2>Personal Finance</h2>
+        </div>
+        <ul>
+            <li class="active">
+                <a href="#dashboard"><i class="fas fa-home"></i> Dashboard</a>
+            </li>
+            <li>
+                <a href="{{ url_for('predictions') }}"><i class="fas fa-chart-line"></i> Predictions</a>
+            </li>
+            <li>
+                <a href="#budget"><i class="fas fa-wallet"></i> Budget</a>
+            </li>
+            <li>
+                <a href="#reports"><i class="fas fa-file-alt"></i> Reports</a>
+            </li>
+            <li>
+                <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="main-content">
+        <header>
+            <h1>Financial Dashboard</h1>
+            <p>Overview of your financial health and key metrics</p>
+        </header>
+
+        <main>
+            <div class="dashboard-grid">
+                <!-- Summary Cards -->
+                <div class="card">
+                    <h3><i class="fas fa-wallet"></i> Total Balance</h3>
+                    <p class="amount">₹50,000</p>
+                    <p class="trend positive">+5.2% from last month</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-arrow-down"></i> Monthly Income</h3>
+                    <p class="amount">₹75,000</p>
+                    <p class="trend positive">+2.1% from last month</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-arrow-up"></i> Monthly Expenses</h3>
+                    <p class="amount">₹45,000</p>
+                    <p class="trend negative">+3.4% from last month</p>
+                </div>
+
+                <div class="card">
+                    <h3><i class="fas fa-piggy-bank"></i> Savings</h3>
+                    <p class="amount">₹30,000</p>
+                    <p class="trend positive">+1.8% from last month</p>
+                </div>
+
+                <!-- Charts Section -->
+                <div class="chart-container">
+                    <h3>Expense Breakdown</h3>
+                    <canvas id="expenseChart"></canvas>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Income vs Expenses Trend</h3>
+                    <canvas id="trendChart"></canvas>
+                </div>
+
+                <!-- Recent Transactions -->
+                <div class="transactions-container">
+                    <h3>Recent Transactions</h3>
+                    <div class="transaction-list">
+                        <div class="transaction">
+                            <div class="transaction-info">
+                                <span class="transaction-title">Grocery Shopping</span>
+                                <span class="transaction-date">Today</span>
+                            </div>
+                            <span class="transaction-amount expense">-₹2,500</span>
+                        </div>
+                        <div class="transaction">
+                            <div class="transaction-info">
+                                <span class="transaction-title">Salary Credit</span>
+                                <span class="transaction-date">Yesterday</span>
+                            </div>
+                            <span class="transaction-amount income">+₹75,000</span>
+                        </div>
+                        <!-- Add more transactions as needed -->
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>© 2024 Personal Finance Predictor</p>
+        </footer>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html> 
