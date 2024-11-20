@@ -6,9 +6,16 @@
     <title>Personal Finance Dashboard</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css" />
 </head>
-<body>
-    <nav class="topnav">
+<body class="dark-theme">
+    <button id="theme-toggle" class="theme-toggle">
+        <i class="fas fa-sun"></i>
+        <i class="fas fa-moon"></i>
+    </button>
+
+    <nav class="topnav glass-effect">
         <div class="logo">
             <h2>Personal Finance</h2>
         </div>
@@ -29,82 +36,118 @@
                 <a href="#settings"><i class="fas fa-cog"></i> Settings</a>
             </li>
         </ul>
+        <div class="nav-extras">
+            <div class="search-bar">
+                <input type="text" placeholder="Search...">
+                <i class="fas fa-search"></i>
+            </div>
+            <div class="notification-bell">
+                <i class="fas fa-bell"></i>
+                <span class="notification-badge">3</span>
+            </div>
+            <div class="user-profile">
+                <img src="{{ url_for('static', filename='images/avatar.png') }}" alt="User Avatar">
+                <div class="user-dropdown">
+                    <span>John Doe</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
     </nav>
 
     <div class="main-content">
-        <header>
-            <h1>Financial Dashboard</h1>
-            <p>Overview of your financial health and key metrics</p>
+        <header data-aos="fade-down">
+            <div class="header-content glass-effect">
+                <div class="welcome-section">
+                    <h1 class="gradient-text">Welcome Back, <span class="user-name">John!</span></h1>
+                    <p class="subtitle">Your financial summary for <span id="currentDate"></span></p>
+                </div>
+                <div class="quick-stats">
+                    <div class="stat-card" data-aos="zoom-in" data-aos-delay="100">
+                        <div class="stat-icon">
+                            <i class="fas fa-arrow-trend-up"></i>
+                        </div>
+                        <div class="stat-info">
+                            <h3>Portfolio Value</h3>
+                            <p class="stat-value">₹1,250,000</p>
+                            <span class="stat-change positive">+15.3%</span>
+                        </div>
+                    </div>
+                    <!-- Add more stat cards -->
+                </div>
+            </div>
         </header>
 
         <main>
             <div class="dashboard-grid">
-                <!-- Summary Cards -->
-                <div class="card">
-                    <h3><i class="fas fa-wallet"></i> Total Balance</h3>
-                    <p class="amount">₹50,000</p>
-                    <p class="trend positive">+5.2% from last month</p>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fas fa-arrow-down"></i> Monthly Income</h3>
-                    <p class="amount">₹75,000</p>
-                    <p class="trend positive">+2.1% from last month</p>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fas fa-arrow-up"></i> Monthly Expenses</h3>
-                    <p class="amount">₹45,000</p>
-                    <p class="trend negative">+3.4% from last month</p>
-                </div>
-
-                <div class="card">
-                    <h3><i class="fas fa-piggy-bank"></i> Savings</h3>
-                    <p class="amount">₹30,000</p>
-                    <p class="trend positive">+1.8% from last month</p>
-                </div>
-
-                <!-- Charts Section -->
-                <div class="chart-container">
-                    <h3>Expense Breakdown</h3>
-                    <canvas id="expenseChart"></canvas>
-                </div>
-
-                <div class="chart-container">
-                    <h3>Income vs Expenses Trend</h3>
-                    <canvas id="trendChart"></canvas>
-                </div>
-
-                <!-- Recent Transactions -->
-                <div class="transactions-container">
-                    <h3>Recent Transactions</h3>
-                    <div class="transaction-list">
-                        <div class="transaction">
-                            <div class="transaction-info">
-                                <span class="transaction-title">Grocery Shopping</span>
-                                <span class="transaction-date">Today</span>
-                            </div>
-                            <span class="transaction-amount expense">-₹2,500</span>
+                <div class="dashboard-card glass-effect" data-aos="fade-up">
+                    <div class="card-header">
+                        <h2>Financial Overview</h2>
+                        <div class="card-actions">
+                            <button class="btn-icon"><i class="fas fa-ellipsis-v"></i></button>
                         </div>
-                        <div class="transaction">
-                            <div class="transaction-info">
-                                <span class="transaction-title">Salary Credit</span>
-                                <span class="transaction-date">Yesterday</span>
+                    </div>
+                    <div class="card-body">
+                        <div class="swiper-container">
+                            <div class="swiper-wrapper">
+                                <div class="swiper-slide">
+                                    <div class="metric-card">
+                                        <div class="metric-icon income">
+                                            <i class="fas fa-wallet"></i>
+                                        </div>
+                                        <div class="metric-details">
+                                            <h3>Total Income</h3>
+                                            <p class="metric-value">₹85,000</p>
+                                            <span class="metric-change positive">
+                                                <i class="fas fa-arrow-up"></i> 8.2%
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- Add more slides -->
                             </div>
-                            <span class="transaction-amount income">+₹75,000</span>
+                            <div class="swiper-pagination"></div>
                         </div>
-                        <!-- Add more transactions as needed -->
+                    </div>
+                </div>
+
+                <div class="dashboard-card glass-effect" data-aos="fade-up" data-aos-delay="200">
+                    <div class="card-header">
+                        <h2>Expense Analytics</h2>
+                        <div class="chart-controls">
+                            <button class="chart-type-btn active" data-type="bar">
+                                <i class="fas fa-chart-bar"></i>
+                            </button>
+                            <button class="chart-type-btn" data-type="line">
+                                <i class="fas fa-chart-line"></i>
+                            </button>
+                            <button class="chart-type-btn" data-type="pie">
+                                <i class="fas fa-chart-pie"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="expenseChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="dashboard-card glass-effect" data-aos="fade-up" data-aos-delay="300">
+                    <div class="card-header">
+                        <h2>Recent Transactions</h2>
+                        <button class="btn-primary">View All</button>
+                    </div>
+                    <div class="card-body">
+                        <div class="transaction-list">
+                            <!-- Transaction items will be dynamically added -->
+                        </div>
                     </div>
                 </div>
             </div>
         </main>
-
-        <footer>
-            <p>© 2024 Personal Finance Predictor</p>
-        </footer>
     </div>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
     <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 </html> 
